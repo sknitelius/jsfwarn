@@ -1,0 +1,26 @@
+<facelet-taglib version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+  <namespace>http://knitelius.com/jsfwarn</namespace>
+  <description>Provides warning messages for JSF2.0/2.1/2.2</description>
+  <tag>
+    <tag-name>warning</tag-name>
+    <description>Performs non-critical validations after invoke-application, to output warning messages and set style.</description>
+    <component>
+      <component-type>warning</component-type>
+    </component>
+    <attribute>
+      <name>ignoreNullOrBlank</name>
+      <required>false</required>
+      <type>java.lang.Boolean</type>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>validator</name>
+      <required>true</required>
+      <type>java.lang.Object</type>
+    </attribute>
+  </tag>
+</facelet-taglib>
