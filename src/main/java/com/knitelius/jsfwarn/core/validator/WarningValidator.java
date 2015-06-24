@@ -29,8 +29,6 @@ import javax.faces.context.FacesContext;
  * Unlike {@link javax.faces.validator.Validator}s, {@link WarningValidator}s
  * can use the model and applications state, since both Model Update and Invoke
  * Application are performed before the Warnings are evaluated.
- * <p/>
- * <p/>
  * <p>
  * {@link WarningValidator} implementations must have a zero-arguments public
  * constructor.
