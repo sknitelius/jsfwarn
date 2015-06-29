@@ -41,8 +41,8 @@ public interface WarningValidator {
    * 
    * @param context - FacesContext.
    * @param component - the component to be validated.
-   * @return warningMsg - optional warning message, if the validation fails.
+   * @param validationResult - the result of the warning validation.
    */
-  public ValidationResult process(FacesContext context, UIInput component);
+  public void process(FacesContext context, UIInput component, ValidationResult validationResult);
 
 }

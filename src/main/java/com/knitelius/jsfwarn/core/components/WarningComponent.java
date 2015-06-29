@@ -29,7 +29,7 @@ public class WarningComponent extends UIComponentBase {
     /**
      * Default Warning style applied to parent.
      */
-    private static final String WARNING_STYLE = "border-color: #FEE40A";
+    private static final String WARNING_STYLE = "border-color: #FF6E01";
 
     @Override
     public String getFamily() {
@@ -61,7 +61,9 @@ public class WarningComponent extends UIComponentBase {
 
     private ValidationResult executeValidator(FacesContext context, UIInput parent) {
         WarningValidator warningValidator = (WarningValidator) getAttributes().get("validator");
-        return warningValidator.process(context, parent);
+        final ValidationResult validationResult = new ValidationResult();
+        warningValidator.process(context, parent, validationResult);
+        return validationResult;
     }
 
     private void setWarningStyle(UIInput input, FacesContext context) {
