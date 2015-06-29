@@ -10,7 +10,7 @@ This project does not impose a specific development philosophy or
 framework, so you're free to architect your code in the way that you want.
 
 * Source: [https://github.com/sknitelius/jsfwarn](https://github.com/sknitelius/jsfwarn)
-* Homepage: [http://www.knitelius.com](http://www.knitelius.com/jsfwarn/)
+* Homepage: [http://www.knitelius.com](http://www.knitelius.com/)
 * Twitter: [@sknitelius](https://twitter.com/sknitelius)
 
 ## Contributing
