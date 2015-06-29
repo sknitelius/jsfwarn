@@ -9,4 +9,7 @@
         <component-class>com.knitelius.jsfwarn.core.components.WarningComponent</component-class>
     </component>
 
+    <lifecycle>
+        <phase-listener>com.knitelius.jsfwarn.core.phaselistener.WarningPhaseListener</phase-listener>
+    </lifecycle>
 </faces-config>
