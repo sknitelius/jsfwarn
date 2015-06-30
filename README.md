@@ -15,4 +15,4 @@ framework, so you're free to architect your code in the way that you want.
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute.
+Everyone is welcome to contribute.
