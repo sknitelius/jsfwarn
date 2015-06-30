@@ -22,21 +22,21 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
+/**
+ * Scans the component tree for warning tags and executes 
+ * the WarningValidators.
+ * 
+ * @author Stephan Knitelius
+ */
 public class WarningPhaseListener implements PhaseListener {
 
     private static final long serialVersionUID = 1590057819828203795L;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void afterPhase(PhaseEvent event) {
         // nothing to do after render response.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void beforePhase(PhaseEvent event) {
         FacesContext context = event.getFacesContext();
@@ -52,9 +52,7 @@ public class WarningPhaseListener implements PhaseListener {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public PhaseId getPhaseId() {
         return PhaseId.RENDER_RESPONSE;
     }
