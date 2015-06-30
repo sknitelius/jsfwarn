@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.knitelius.jsfwarn.core.components;
+package com.knitelius.jsfwarn.components;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
-import com.knitelius.jsfwarn.core.validator.ValidationResult;
-import com.knitelius.jsfwarn.core.validator.WarningValidator;
+import com.knitelius.jsfwarn.validator.ValidationResult;
+import com.knitelius.jsfwarn.validator.WarningValidator;
 
 @FacesComponent("warning")
 public class WarningComponent extends UIComponentBase {

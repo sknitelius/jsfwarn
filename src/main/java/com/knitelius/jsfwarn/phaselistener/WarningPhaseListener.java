@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.knitelius.jsfwarn.core.phaselistener;
+package com.knitelius.jsfwarn.phaselistener;
 
-import com.knitelius.jsfwarn.core.components.WarningComponent;
+import com.knitelius.jsfwarn.components.WarningComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
