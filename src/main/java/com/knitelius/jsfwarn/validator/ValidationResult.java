@@ -18,17 +18,28 @@ package com.knitelius.jsfwarn.validator;
 import javax.faces.application.FacesMessage;
 
 public class ValidationResult {
-  private FacesMessage facesMessage;
 
-  public FacesMessage getFacesMessage() {
-    return facesMessage;
-  }
+    private FacesMessage facesMessage;
+    
+    private boolean applyStyle = true;
 
-  public void setFacesMessage(FacesMessage facesMessage) {
-    this.facesMessage = facesMessage;
-  }
+    public FacesMessage getFacesMessage() {
+        return facesMessage;
+    }
 
-  public boolean validationFailed() {
-    return facesMessage != null;
-  }
+    public void setFacesMessage(FacesMessage facesMessage) {
+        this.facesMessage = facesMessage;
+    }
+
+    public boolean validationFailed() {
+        return facesMessage != null;
+    }
+
+    public boolean isApplyStyle() {
+        return applyStyle;
+    }
+
+    public void setApplyStyle(boolean applyStyle) {
+        this.applyStyle = applyStyle;
+    }
 }

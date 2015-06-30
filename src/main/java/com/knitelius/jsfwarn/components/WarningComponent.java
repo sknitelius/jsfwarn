@@ -29,7 +29,7 @@ public class WarningComponent extends UIComponentBase {
     /**
      * Default Warning style applied to parent.
      */
-    private static final String WARNING_STYLE = "border-color: #FF6E01";
+    private static final String WARNING_STYLE = "border-color: #FF6E01;";
 
     @Override
     public String getFamily() {
@@ -42,7 +42,7 @@ public class WarningComponent extends UIComponentBase {
             ValidationResult validationResult = executeValidator(context, parent);
             if (validationResult.validationFailed()) {
                 context.addMessage(parent.getClientId(), validationResult.getFacesMessage());
-                setWarningStyle(parent, context);
+                setWarningStyle(parent, context, validationResult);
             } else {
                 removeWarningStyle(parent, context);
             }
@@ -66,12 +66,23 @@ public class WarningComponent extends UIComponentBase {
         return validationResult;
     }
 
-    private void setWarningStyle(UIInput input, FacesContext context) {
-        input.getAttributes().put("style", getWarningStyle());
+    private void setWarningStyle(UIInput input, FacesContext context, ValidationResult validationResult) {
+        removeWarningStyle(input, context);
+        if(validationResult.isApplyStyle()) {
+            Object style = input.getAttributes().get("style");
+            if(style == null || style instanceof String) {
+                style = style == null ? getWarningStyle() : getWarningStyle() + ((String)style);
+                input.getAttributes().put("style", style);
+            }
+        }
     }
 
     private void removeWarningStyle(UIInput input, FacesContext context) {
-        input.getAttributes().put("style", "");
+        Object style = input.getAttributes().get("style");
+        if(style instanceof String) {
+            style = ((String)style).replaceAll(getWarningStyle(), "");
+        }
+        input.getAttributes().put("style", style);
     }
 
     private String getWarningStyle() {
@@ -79,6 +90,6 @@ public class WarningComponent extends UIComponentBase {
         if (style == null || "".equals(style)) {
             style = WARNING_STYLE;
         }
-        return style;
+        return style + ";";
     }
 }
