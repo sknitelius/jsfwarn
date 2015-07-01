@@ -39,6 +39,10 @@ public class ValidationResult {
         return applyStyle;
     }
 
+    /**
+     * If set to false the defined style will not be applied (default true).
+     * @param applyStyle - boolean 
+     */
     public void setApplyStyle(boolean applyStyle) {
         this.applyStyle = applyStyle;
     }
