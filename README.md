@@ -1,6 +1,6 @@
 # [JsfWarn](http://www.knitelius.com/jsfwarn/)
 
-JsfWarn enables non-terminal field-level validations.
+JsfWarn enables non-terminal field-level JSF validations.
 
 * Homepage: [http://www.knitelius.com/jsfwarn](http://www.knitelius.com/jsfwarn)
 * Twitter: [@sknitelius](https://twitter.com/sknitelius)
