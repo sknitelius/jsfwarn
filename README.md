@@ -12,7 +12,7 @@ framework, so you're free to architect your code in the way that you want.
 * Twitter: [@sknitelius](https://twitter.com/sknitelius)
 
 ## Usage
-Include JsfWarn dependency:
+Include JsfWarn dependency in your WebApp:
 ```xml
   <dependency>
     <groupId>com.knitelius</groupId>
