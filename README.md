@@ -48,3 +48,7 @@ Add the jw:warning tag to the component:
 ## Contributing
 
 Everyone is welcome to contribute.
+
+## License
+
+This software is provided under the  Apache 2.0 license, read the `LICENSE.txt` file for details.
