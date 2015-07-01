@@ -1,15 +1,11 @@
 # [JsfWarn](http://www.knitelius.com/jsfwarn/)
 
-JsfWarn offers validation style warning messages and field markings.
+JsfWarn enables non-terminal field-level validations.
 
-For further details see: http://www.knitelius.com/jsfwarn
-
-This project does not impose a specific development philosophy or
-framework, so you're free to architect your code in the way that you want.
-
-* Source: [https://github.com/sknitelius/jsfwarn](https://github.com/sknitelius/jsfwarn)
-* Homepage: [http://www.knitelius.com](http://www.knitelius.com/)
+* Homepage: [http://www.knitelius.com/jsfwarn](http://www.knitelius.com/jsfwarn)
 * Twitter: [@sknitelius](https://twitter.com/sknitelius)
+* Source: [https://github.com/sknitelius/jsfwarn](https://github.com/sknitelius/jsfwarn)
+
 
 ## Usage
 Include JsfWarn dependency in your WebApp:
@@ -46,6 +42,9 @@ Add the jw:warning tag to the component:
 
 
 ## Contributing
+
+This project does not impose a specific development philosophy or
+framework, so you're free to architect your code in the way that you want.
 
 Everyone is welcome to contribute.
 
