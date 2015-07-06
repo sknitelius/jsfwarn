@@ -22,6 +22,9 @@ import javax.faces.context.FacesContext;
 
 import com.knitelius.jsfwarn.validator.ValidationResult;
 import com.knitelius.jsfwarn.validator.WarningValidator;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
+import javax.xml.bind.ValidationException;
 
 @FacesComponent("warning")
 public class WarningComponent extends UIComponentBase {
@@ -60,9 +63,17 @@ public class WarningComponent extends UIComponentBase {
     }
 
     private ValidationResult executeValidator(FacesContext context, UIInput parent) {
-        WarningValidator warningValidator = (WarningValidator) getAttributes().get("validator");
+        Object warningValidator = getAttributes().get("validator");
         final ValidationResult validationResult = new ValidationResult();
-        warningValidator.process(context, parent, validationResult);
+        if(warningValidator instanceof WarningValidator) {
+            ((WarningValidator)warningValidator).process(context, parent, validationResult);
+        } else if(warningValidator instanceof Validator) {
+            try{
+                ((Validator)warningValidator).validate(context, parent, parent.getValue());
+            } catch(ValidatorException ve) {
+                validationResult.setFacesMessage(ve.getFacesMessage());
+            } 
+        }
         return validationResult;
     }
 
