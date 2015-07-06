@@ -80,7 +80,7 @@ public class WarningComponent extends UIComponentBase {
     private void removeWarningStyle(UIInput input, FacesContext context) {
         Object style = input.getAttributes().get("style");
         if(style instanceof String) {
-            style = ((String)style).replaceAll(getWarningStyle(), "");
+            style = ((String)style).replaceAll(getWarningStyle(), "").trim();
         }
         input.getAttributes().put("style", style);
     }
@@ -90,6 +90,6 @@ public class WarningComponent extends UIComponentBase {
         if (style == null || "".equals(style)) {
             style = WARNING_STYLE;
         }
-        return style + ";";
+        return style.contains(";") ? style : style + ";";
     }
 }

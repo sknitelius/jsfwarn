@@ -16,38 +16,13 @@
 package com.knitelius.jsfwarn.components;
 
 import com.knitelius.jsfwarn.validator.ValidationResult;
-import com.knitelius.jsfwarn.validator.WarningValidator;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class WarningComponentIgnoreNullOrEmptyTest {
-
-    @Mock
-    private FacesContext context;
-
-    @Mock
-    private UIInput parent;
-
-    @Mock
-    private WarningValidator validator;
-
-    @InjectMocks
-    private WarningComponent warningComponent;
-
-    @Before
-    public void init() {
-        warningComponent.getAttributes().put("validator", validator);
-    }
+public class WarningComponentIgnoreNullOrEmptyTest extends AbstractWarningComponetTest {
 
     @Test
     public void test_validator_not_executed_because_value_is_empty() {
