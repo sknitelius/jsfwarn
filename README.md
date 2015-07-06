@@ -13,7 +13,7 @@ Include JsfWarn dependency in your WebApp:
   <dependency>
     <groupId>com.knitelius</groupId>
     <artifactId>jsfwarn</artifactId>
-    <version>0.0.9</version>
+    <version>0.0.11</version>
   </dependency>
 ```
 Implement a WarningValidator:
