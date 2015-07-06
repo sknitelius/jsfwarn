@@ -99,4 +99,15 @@ public class WarningComponentStyleTest extends AbstractWarningComponetTest {
         
         assertEquals("border-color: #FF6E01;foo: bar;", parent.getAttributes().get("style"));
     }
+
+    @Test
+    public void test_custome_warning_style_applied() {
+        Mockito.when(parent.getValue()).thenReturn("foobar");
+        warningComponent.getAttributes().put("style", "my: customeStyle");
+        warningComponent.getAttributes().put("validator", new TestValidator(true, true));
+        
+        warningComponent.executeWarning(context);
+        
+        assertEquals("my: customeStyle;", parent.getAttributes().get("style"));
+    }
 }
