@@ -124,7 +124,7 @@
         <profile>
             <activation>
                 <property>
-                    <name>gpg.keyname</name>
+                    <name>gpg.passphrase</name>
                 </property>
             </activation>
             <build>
