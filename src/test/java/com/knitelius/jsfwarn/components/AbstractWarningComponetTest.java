@@ -21,13 +21,10 @@ import java.util.Map;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
 public class AbstractWarningComponetTest {
 
     @Mock

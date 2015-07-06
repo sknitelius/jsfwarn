@@ -22,10 +22,12 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.runners.model.MultipleFailureException;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 
+@RunWith(MockitoJUnitRunner.class)
 public class WarningComponentStyleTest extends AbstractWarningComponetTest {
         
     @Test
