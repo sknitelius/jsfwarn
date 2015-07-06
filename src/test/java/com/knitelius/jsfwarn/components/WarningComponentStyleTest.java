@@ -15,11 +15,6 @@
  */
 package com.knitelius.jsfwarn.components;
 
-import com.knitelius.jsfwarn.validator.ValidationResult;
-import com.knitelius.jsfwarn.validator.WarningValidator;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -103,24 +98,5 @@ public class WarningComponentStyleTest extends AbstractWarningComponetTest {
         warningComponent.executeWarning(context);
         
         assertEquals("border-color: #FF6E01;foo: bar;", parent.getAttributes().get("style"));
-    }
-    
-    class TestValidator implements WarningValidator {
-        private final boolean fail;
-        private final boolean applyStyle;
-        
-        public TestValidator(boolean fail, boolean applyStyle) {
-            this.fail = fail;
-            this.applyStyle = applyStyle;
-        }
-        
-        @Override
-        public void process(FacesContext context, UIInput component, ValidationResult validationResult) {
-            if(fail) {
-                validationResult.setFacesMessage(new FacesMessage(FacesMessage.SEVERITY_WARN, "warning", "warning"));
-            } 
-            validationResult.setApplyStyle(applyStyle);
-        }
-        
     }
 }
