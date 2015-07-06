@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.knitelius</groupId>
     <artifactId>jsfwarn</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.10</version>
     <packaging>jar</packaging>
     
     <name>JsfWarn</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git@github.com:sknitelius/jsfwarn.git</connection>
         <url>scm:git:git@github.com:sknitelius/jsfwarn.git</url>
         <developerConnection>scm:git:git@github.com:sknitelius/jsfwarn.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>jsfwarn-0.0.10</tag>
     </scm>
       
     <dependencies>
