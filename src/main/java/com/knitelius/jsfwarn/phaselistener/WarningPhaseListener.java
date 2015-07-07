@@ -46,7 +46,7 @@ public class WarningPhaseListener implements PhaseListener {
     public static void executeWarnings(FacesContext context, UIComponent parent) {
         for (UIComponent child : parent.getChildren()) {
             if (WarningComponent.class.isAssignableFrom(child.getClass())) {
-                (WarningComponent.class.cast(child)).executeWarning(context);
+                WarningProcessor.process(context, (WarningComponent) child);
             }
             executeWarnings(context, child);
         }

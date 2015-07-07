@@ -18,13 +18,8 @@ package com.knitelius.jsfwarn.components;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 
 import com.knitelius.jsfwarn.validator.ValidationResult;
-import com.knitelius.jsfwarn.validator.WarningValidator;
-import javax.faces.validator.Validator;
-import javax.faces.validator.ValidatorException;
-import javax.xml.bind.ValidationException;
 
 @FacesComponent("warning")
 public class WarningComponent extends UIComponentBase {
@@ -39,46 +34,8 @@ public class WarningComponent extends UIComponentBase {
         return "warningComponent";
     }
 
-    public void executeWarning(FacesContext context) {
-        UIInput parent = (UIInput) getParent();
-        if (isValueSetOrValidateEmptyValues(parent)) {
-            ValidationResult validationResult = executeValidator(context, parent);
-            if (validationResult.validationFailed()) {
-                context.addMessage(parent.getClientId(), validationResult.getFacesMessage());
-                setWarningStyle(parent, context, validationResult);
-            } else {
-                removeWarningStyle(parent, context);
-            }
-        } else {
-            removeWarningStyle(parent, context);
-        }
-    }
-
-    private boolean isValueSetOrValidateEmptyValues(UIInput parent) {
-        Boolean ignoreNullOrBlank = Boolean.TRUE;
-        if (getAttributes().get("ignoreNullOrBlank") != null) {
-            ignoreNullOrBlank = (Boolean) getAttributes().get("ignoreNullOrBlank");
-        }
-        return !(ignoreNullOrBlank && (parent.getValue() == null || "".equals(parent.getValue().toString())));
-    }
-
-    private ValidationResult executeValidator(FacesContext context, UIInput parent) {
-        Object warningValidator = getAttributes().get("validator");
-        final ValidationResult validationResult = new ValidationResult();
-        if(warningValidator instanceof WarningValidator) {
-            ((WarningValidator)warningValidator).process(context, parent, validationResult);
-        } else if(warningValidator instanceof Validator) {
-            try{
-                ((Validator)warningValidator).validate(context, parent, parent.getValue());
-            } catch(ValidatorException ve) {
-                validationResult.setFacesMessage(ve.getFacesMessage());
-            } 
-        }
-        return validationResult;
-    }
-
-    private void setWarningStyle(UIInput input, FacesContext context, ValidationResult validationResult) {
-        removeWarningStyle(input, context);
+    public void setWarningStyle(UIInput input, ValidationResult validationResult) {
+        removeWarningStyle(input);
         if(validationResult.isApplyStyle()) {
             Object style = input.getAttributes().get("style");
             if(style == null || style instanceof String) {
@@ -88,7 +45,7 @@ public class WarningComponent extends UIComponentBase {
         }
     }
 
-    private void removeWarningStyle(UIInput input, FacesContext context) {
+    public void removeWarningStyle(UIInput input) {
         Object style = input.getAttributes().get("style");
         if(style instanceof String) {
             style = ((String)style).replaceAll(getWarningStyle(), "").trim();
@@ -96,11 +53,15 @@ public class WarningComponent extends UIComponentBase {
         input.getAttributes().put("style", style);
     }
 
-    private String getWarningStyle() {
+    public String getWarningStyle() {
         String style = (String) getAttributes().get("style");
         if (style == null || "".equals(style)) {
             style = WARNING_STYLE;
         }
         return style.contains(";") ? style : style + ";";
+    }
+
+    public Object getWarningValidator() {
+        return getAttributes().get("validator");
     }
 }
