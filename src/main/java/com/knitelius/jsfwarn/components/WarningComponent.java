@@ -20,48 +20,132 @@ import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIInput;
 
 import com.knitelius.jsfwarn.validator.ValidationResult;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.StateHelper;
+import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlInputHidden;
+import javax.faces.component.html.HtmlInputSecret;
+import javax.faces.component.html.HtmlInputText;
+import javax.faces.component.html.HtmlInputTextarea;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 
 @FacesComponent("warning")
 public class WarningComponent extends UIComponentBase {
-
-    /**
-     * Default Warning style applied to parent.
-     */
-    private static final String WARNING_STYLE = "border-color: #FF6E01;";
 
     @Override
     public String getFamily() {
         return "warningComponent";
     }
 
-    public void setWarningStyle(UIInput input, ValidationResult validationResult) {
-        removeWarningStyle(input);
-        if(validationResult.isApplyStyle()) {
-            Object style = input.getAttributes().get("style");
-            if(style == null || style instanceof String) {
-                style = style == null ? getWarningStyle() : getWarningStyle() + ((String)style);
-                input.getAttributes().put("style", style);
-            }
+    public String getJsfWarnStyleClass(FacesMessage.Severity severity) {
+        String styleClass = null;
+        if (severity != null) {
+            styleClass = getStyleClassBySeverity(severity);
+        }
+        if (styleClass == null || styleClass.equals("")) {
+            styleClass = getGlobalStyleClass();
+        }
+        return styleClass;
+    }
+
+    private String getGlobalStyleClass() {
+        return (String) getAttributes().get("styleClass");
+    }
+
+    private String getStyleClassBySeverity(FacesMessage.Severity severity) {
+        return (String) getAttributes().get(severity.toString().toLowerCase() + "Class");
+    }
+
+    public void applyJsfWarnStyling(UIInput parent, ValidationResult validationResult) {
+        removeJsfWarningStyling(parent);
+        if (validationResult.isApplyStyle()) {
+            applyJsfWarnStyleClass(validationResult, parent);
+            applyJsfWarnInlineStyle(parent);
         }
     }
 
-    public void removeWarningStyle(UIInput input) {
-        Object style = input.getAttributes().get("style");
-        if(style instanceof String) {
-            style = ((String)style).replaceAll(getWarningStyle(), "").trim();
+    private void applyJsfWarnInlineStyle(UIInput parent) {
+        Object style = parent.getAttributes().get("style");
+        if (style == null || style instanceof String) {
+            style = style == null ? getWarningStyle() : getWarningStyle() + ((String) style);
+            parent.getAttributes().put("style", style);
         }
-        input.getAttributes().put("style", style);
+    }
+
+    private void applyJsfWarnStyleClass(ValidationResult validationResult, UIInput parent) {
+        String jsfWarnStyleClass = getJsfWarnStyleClass(validationResult.getSeverity());
+        if (jsfWarnStyleClass != null) {
+            if (parent instanceof HtmlInputText) {
+                final HtmlInputText parentType = (HtmlInputText) parent;
+                String parentStyleClass = parentType.getStyleClass();
+                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
+            } else if (parent instanceof HtmlInputSecret) {
+                final HtmlInputSecret parentType = (HtmlInputSecret) parent;
+                String parentStyleClass = parentType.getStyleClass();
+                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
+            } else if (parent instanceof HtmlSelectBooleanCheckbox) {
+                final HtmlSelectBooleanCheckbox parentType = (HtmlSelectBooleanCheckbox) parent;
+                String parentStyleClass = parentType.getStyleClass();
+                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
+            } 
+        }
+
+    }
+
+    public void removeJsfWarningStyling(UIInput parent) {
+        String style = (String) parent.getAttributes().get("style");
+        String styleClass = (String) parent.getAttributes().get("styleClass");
+        style = style == null ? "" : style;
+        styleClass = styleClass == null ? "" : style;
+        parent.getAttributes().put("style", style.replaceAll(getWarningStyle(), "").trim());
+        parent.getAttributes().put("styleClass", removeJsfWarnStyleClasses(styleClass));
     }
 
     public String getWarningStyle() {
         String style = (String) getAttributes().get("style");
-        if (style == null || "".equals(style)) {
-            style = WARNING_STYLE;
-        }
+        style = style == null ? "" : style;
         return style.contains(";") ? style : style + ";";
     }
 
     public Object getWarningValidator() {
         return getAttributes().get("validator");
     }
+
+    private String removeJsfWarnStyleClasses(String styleClass) {
+        styleClass = styleClass.replaceAll(WarningComponent.this.getJsfWarnStyleClass(), "");
+        styleClass = styleClass.replaceAll(getJsfWarnInfoClass(), "");
+        styleClass = styleClass.replaceAll(getJsfWarnWarnClass(), "");
+        styleClass = styleClass.replaceAll(getJsfWarnErrorClass(), "");
+        styleClass = styleClass.replaceAll(getJsfWarnFatalClass(), "");
+        return styleClass.trim();
+    }
+
+    public String getJsfWarnStyleClass() {
+        final String styleClass = (String) getAttributes().get("styleClass");
+        return styleClass == null ? "" : styleClass;
+    }
+
+    public String getJsfWarnInfoClass() {
+        final String styleClass = (String) getAttributes().get("styleClass");
+        return styleClass == null ? "" : styleClass;
+    }
+
+    public String getJsfWarnWarnClass() {
+        final String styleClass = (String) getAttributes().get("styleClass");
+        return styleClass == null ? "" : styleClass;
+    }
+
+    public String getJsfWarnErrorClass() {
+        final String styleClass = (String) getAttributes().get("styleClass");
+        return styleClass == null ? "" : styleClass;
+    }
+
+    public String getJsfWarnFatalClass() {
+        final String styleClass = (String) getAttributes().get("styleClass");
+        return styleClass == null ? "" : styleClass;
+    }
+
 }

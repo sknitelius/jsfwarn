@@ -28,12 +28,12 @@ public class WarningProcessor {
             ValidationResult validationResult = ValidationProcessor.execute(warningComponent.getWarningValidator(), context, parent);
             if (validationResult.validationFailed()) {
                 context.addMessage(parent.getClientId(), validationResult.getFacesMessage());
-                warningComponent.setWarningStyle(parent, validationResult);
+                warningComponent.applyJsfWarnStyling(parent, validationResult);
             } else {
-                warningComponent.removeWarningStyle(parent);
+                warningComponent.removeJsfWarningStyling(parent);
             }
         } else {
-            warningComponent.removeWarningStyle(parent);
+            warningComponent.removeJsfWarningStyling(parent);
         }
     }
 

@@ -38,6 +38,10 @@ public class ValidationResult {
     public boolean isApplyStyle() {
         return applyStyle;
     }
+    
+    public FacesMessage.Severity getSeverity() {
+        return facesMessage != null ? facesMessage.getSeverity() : null;
+    }
 
     /**
      * If set to false the defined style will not be applied (default true).

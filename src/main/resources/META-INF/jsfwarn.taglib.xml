@@ -14,13 +14,33 @@
       <type>java.lang.Boolean</type>
     </attribute>
     <attribute>
+      <name>validator</name>
+      <required>true</required>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
       <name>style</name>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <name>validator</name>
-      <required>true</required>
-      <type>java.lang.Object</type>
+      <name>styleClass</name>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>infoClass</name>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>warnClass</name>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>errorClass</name>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>fatalClass</name>
+      <type>java.lang.String</type>
     </attribute>
   </tag>
 </facelet-taglib>
