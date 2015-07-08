@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.knitelius.jsfwarn.phaselistener;
+package com.knitelius.jsfwarn.processor;
 
-import com.knitelius.jsfwarn.components.ValidationProcessor;
 import com.knitelius.jsfwarn.components.WarningComponent;
 import com.knitelius.jsfwarn.validator.ValidationResult;
 import javax.faces.component.UIInput;

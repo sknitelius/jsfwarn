@@ -15,6 +15,7 @@
  */
 package com.knitelius.jsfwarn.phaselistener;
 
+import com.knitelius.jsfwarn.processor.WarningProcessor;
 import com.knitelius.jsfwarn.components.WarningComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

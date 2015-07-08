@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.knitelius.jsfwarn.components;
+package com.knitelius.jsfwarn.processor;
 
 import com.knitelius.jsfwarn.validator.ValidationResult;
 import com.knitelius.jsfwarn.validator.WarningValidator;
