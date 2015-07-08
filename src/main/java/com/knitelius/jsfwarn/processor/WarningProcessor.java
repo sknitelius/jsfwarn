@@ -24,16 +24,16 @@ public class WarningProcessor {
 
     public static void process(FacesContext context, WarningComponent warningComponent) {
         final UIInput parent = (UIInput) warningComponent.getParent();
-        if(proceedWithValidation(warningComponent, parent)) {
+        if (proceedWithValidation(warningComponent, parent)) {
             ValidationResult validationResult = ValidationProcessor.execute(warningComponent.getWarningValidator(), context, parent);
             if (validationResult.validationFailed()) {
                 context.addMessage(parent.getClientId(), validationResult.getFacesMessage());
-                warningComponent.applyJsfWarnStyling(parent, validationResult);
+                StyleProcessor.applyJsfWarnStyling(warningComponent, parent, validationResult);
             } else {
-                warningComponent.removeJsfWarningStyling(parent);
+                StyleProcessor.removeJsfWarningStyling(warningComponent, parent);
             }
         } else {
-            warningComponent.removeJsfWarningStyling(parent);
+            StyleProcessor.removeJsfWarningStyling(warningComponent, parent);
         }
     }
 

@@ -23,12 +23,13 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 public class ValidationProcessor {
+
     public static ValidationResult execute(Object validator, FacesContext context, UIInput parent) {
         ValidationResult validationResult = new ValidationResult();
-        if(validator instanceof WarningValidator) {
+        if (validator instanceof WarningValidator) {
             handleWarningValidator(validator, context, parent, validationResult);
-        } else if(validator instanceof Validator) {
-            handleJsfValidator(validator, context, parent, validationResult); 
+        } else if (validator instanceof Validator) {
+            handleJsfValidator(validator, context, parent, validationResult);
         } else {
             throw new IllegalArgumentException("Validator of type " + validator.getClass() + "is not supported.");
         }
@@ -36,13 +37,13 @@ public class ValidationProcessor {
     }
 
     private static void handleWarningValidator(Object validator, FacesContext context, UIInput parent, ValidationResult validationResult) {
-        ((WarningValidator)validator).process(context, parent, validationResult);
+        ((WarningValidator) validator).process(context, parent, validationResult);
     }
 
     private static void handleJsfValidator(Object validator, FacesContext context, UIInput parent, ValidationResult validationResult) {
-        try{
-            ((Validator)validator).validate(context, parent, parent.getValue());
-        } catch(ValidatorException ve) {
+        try {
+            ((Validator) validator).validate(context, parent, parent.getValue());
+        } catch (ValidatorException ve) {
             validationResult.setFacesMessage(ve.getFacesMessage());
         }
     }
