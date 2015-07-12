@@ -17,17 +17,17 @@ package com.knitelius.jsfwarn.processor;
 
 import com.knitelius.jsfwarn.components.WarningComponent;
 import com.knitelius.jsfwarn.validator.ValidationResult;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.component.UIInput;
-import javax.faces.component.html.HtmlInputSecret;
-import javax.faces.component.html.HtmlInputText;
-import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 
 public class StyleProcessor {
 
     public static void applyJsfWarnStyling(WarningComponent component, UIInput parent, ValidationResult validationResult) {
         removeJsfWarningStyling(component, parent);
         if (validationResult.isApplyStyle()) {
-            applyJsfWarnStyleClass(component, validationResult, parent);
+            applyJsfWarnStyleClass(component, parent, validationResult);
             applyJsfWarnInlineStyle(component, parent);
         }
     }
@@ -49,23 +49,32 @@ public class StyleProcessor {
         }
     }
 
-    private static void applyJsfWarnStyleClass(WarningComponent component, ValidationResult validationResult, UIInput parent) {
+    private static void applyJsfWarnStyleClass(WarningComponent component, UIInput parent, ValidationResult validationResult) {
         String jsfWarnStyleClass = component.getJsfWarnStyleClass(validationResult.getSeverity());
-        if (jsfWarnStyleClass != null) {
-            if (parent instanceof HtmlInputText) {
-                final HtmlInputText parentType = (HtmlInputText) parent;
-                String parentStyleClass = parentType.getStyleClass();
-                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
-            } else if (parent instanceof HtmlInputSecret) {
-                final HtmlInputSecret parentType = (HtmlInputSecret) parent;
-                String parentStyleClass = parentType.getStyleClass();
-                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
-            } else if (parent instanceof HtmlSelectBooleanCheckbox) {
-                final HtmlSelectBooleanCheckbox parentType = (HtmlSelectBooleanCheckbox) parent;
-                String parentStyleClass = parentType.getStyleClass();
-                parentType.setStyleClass(jsfWarnStyleClass + " " + parentStyleClass);
+
+        StyleMethods styleMethods = findStyleMethods(parent);
+        if (styleMethods.found()) {
+            styleMethods.applyStyle(parent, jsfWarnStyleClass);
+        } else {
+            String parentStyleClass = (String) parent.getAttributes().get("styleClass");
+            parent.getAttributes().put("styleClass", jsfWarnStyleClass + " " + parentStyleClass);
+        }
+    }
+
+    private static StyleMethods findStyleMethods(UIInput parent) {
+        Method[] declaredMethods = parent.getClass().getDeclaredMethods();
+        StyleMethods styleMethods = new StyleMethods();
+        for (Method method : declaredMethods) {
+            if ("setStyleClass".equals(method.getName())) {
+                styleMethods.setStyleMethod = method;
+            } else if ("getStyleClass".equals(method.getName())) {
+                styleMethods.getStyleMethod = method;
+            }
+            if (styleMethods.found()) {
+                break;
             }
         }
+        return styleMethods;
     }
 
     private static String removeJsfWarnStyleClasses(WarningComponent component, String styleClass) {
@@ -75,5 +84,24 @@ public class StyleProcessor {
         styleClass = styleClass.replaceAll(component.getJsfWarnErrorClass(), "");
         styleClass = styleClass.replaceAll(component.getJsfWarnFatalClass(), "");
         return styleClass.trim();
+    }
+
+    private static class StyleMethods {
+
+        Method setStyleMethod = null;
+        Method getStyleMethod = null;
+
+        void applyStyle(UIInput parent, String jsfWarnStyleClass) {
+            try {
+                String parentStyleClass = (String) getStyleMethod.invoke(parent);
+                setStyleMethod.invoke(parent, jsfWarnStyleClass + " " + parentStyleClass);
+            } catch (Exception ex) {
+                Logger.getLogger(StyleProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        boolean found() {
+            return setStyleMethod != null && getStyleMethod != null;
+        }
     }
 }
