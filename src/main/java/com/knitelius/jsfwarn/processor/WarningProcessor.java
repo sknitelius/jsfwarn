@@ -16,6 +16,7 @@
 package com.knitelius.jsfwarn.processor;
 
 import com.knitelius.jsfwarn.components.WarningComponent;
+import com.knitelius.jsfwarn.components.wrapper.StylableUIComponent;
 import com.knitelius.jsfwarn.validator.ValidationResult;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -30,10 +31,10 @@ public class WarningProcessor {
                 context.addMessage(parent.getClientId(), validationResult.getFacesMessage());
                 StyleProcessor.applyJsfWarnStyling(warningComponent, parent, validationResult);
             } else {
-                StyleProcessor.removeJsfWarningStyling(warningComponent, parent);
+                StyleProcessor.removeJsfWarningStyling(warningComponent, new StylableUIComponent(parent));
             }
         } else {
-            StyleProcessor.removeJsfWarningStyling(warningComponent, parent);
+            StyleProcessor.removeJsfWarningStyling(warningComponent, new StylableUIComponent(parent));
         }
     }
 
