@@ -12,35 +12,43 @@
       <name>ignoreNullOrBlank</name>
       <required>false</required>
       <type>java.lang.Boolean</type>
+      <description>By default null or blank values will be ignored.</description>
     </attribute>
     <attribute>
       <name>validator</name>
       <required>true</required>
       <type>java.lang.Object</type>
+      <description>The validator that should be executed, must implement WarningValidator or JSF Validator.</description>
     </attribute>
     <attribute>
       <name>style</name>
       <type>java.lang.String</type>
+      <description>Inline style to be displayed on failure.</description>
     </attribute>
     <attribute>
       <name>styleClass</name>
       <type>java.lang.String</type>
+      <description>StlyeClass to be applied in case of failure.</description>
     </attribute>
     <attribute>
       <name>infoClass</name>
       <type>java.lang.String</type>
+      <description>StyleClass to be applied in case of Severity.SEVERITY_INFO , will override styleClass.</description>
     </attribute>
     <attribute>
       <name>warnClass</name>
       <type>java.lang.String</type>
+      <description>StyleClass to be applied in case of Severity.SEVERITY_WARN level, will override styleClass.</description>
     </attribute>
     <attribute>
       <name>errorClass</name>
       <type>java.lang.String</type>
+      <description>StyleClass to be applied in case of Severity.SEVERITY_ERROR level, will override styleClass.</description>
     </attribute>
     <attribute>
       <name>fatalClass</name>
       <type>java.lang.String</type>
+      <description>StyleClass to be applied in case of Severity.SEVERITY_FATAL level, will override styleClass.</description>
     </attribute>
   </tag>
 </facelet-taglib>
