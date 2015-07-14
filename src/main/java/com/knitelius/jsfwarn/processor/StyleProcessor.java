@@ -24,11 +24,11 @@ public class StyleProcessor {
 
     public static void applyJsfWarnStyling(WarningComponent component, UIInput parent, ValidationResult validationResult) {
         StylableUIComponent stylableUIComponent = new StylableUIComponent(parent);
-        
+
         removeJsfWarningStyling(component, stylableUIComponent);
         if (validationResult.isApplyStyle()) {
-            applyJsfWarnStyleClass(component, parent, validationResult);
-            applyJsfWarnInlineStyle(component, parent);
+            applyJsfWarnStyleClass(component, stylableUIComponent, validationResult);
+            applyJsfWarnInlineStyle(component, stylableUIComponent);
         }
     }
 
@@ -41,18 +41,13 @@ public class StyleProcessor {
         parent.setStyleClass(removeJsfWarnStyleClasses(component, styleClass));
     }
 
-    private static void applyJsfWarnInlineStyle(WarningComponent component, UIInput parent) {
-        Object style = parent.getAttributes().get("style");
-        if (style == null || style instanceof String) {
-            style = style == null ? component.getWarningStyle() : component.getWarningStyle() + ((String) style);
-            parent.getAttributes().put("style", style);
-        }
+    private static void applyJsfWarnInlineStyle(WarningComponent component, StylableUIComponent parent) {
+        parent.setStyle(component.getWarningStyle() + parent.getStyle());
     }
 
-    private static void applyJsfWarnStyleClass(WarningComponent component, UIInput parent, ValidationResult validationResult) {
+    private static void applyJsfWarnStyleClass(WarningComponent component, StylableUIComponent parent, ValidationResult validationResult) {
         String jsfWarnStyleClass = component.getJsfWarnStyleClass(validationResult.getSeverity());
-        StylableUIComponent stylableUIComponent = new StylableUIComponent(parent);
-        stylableUIComponent.applyStyleClass(jsfWarnStyleClass);
+        parent.applyStyleClass(jsfWarnStyleClass);
     }
 
     private static String removeJsfWarnStyleClasses(WarningComponent component, String styleClass) {
