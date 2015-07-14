@@ -13,7 +13,7 @@ Include JsfWarn dependency in your WebApp:
   <dependency>
     <groupId>com.knitelius</groupId>
     <artifactId>jsfwarn</artifactId>
-    <version>0.0.11</version>
+    <version>0.1.0-beta1</version>
   </dependency>
 ```
 Implement a WarningValidator:
@@ -32,10 +32,12 @@ public class FooWarningValidator implements WarningValidator{
 }
 ```
 
+You can also use existing JSF validators, instead of implementing a WarningValidator.
+
 Add the jw:warning tag to the component:
 ```xhtml
 <h:inputText id="bar" value=...>
-  <jw:warning validator="#{fooWarningValidator}" />
+  <jw:warning styleClass="myWarning" validator="#{fooWarningValidator}" />
   <f:ajax event="change" render="@this" />
 </h:inputText>
 ```
